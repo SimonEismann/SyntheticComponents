@@ -16,3 +16,4 @@ blocks:
           - gradle build
           - docker build . -t comp
           - docker tag comp simoneismann/syntheticcomponents
+          - docker push simoneismann/syntheticcomponents
