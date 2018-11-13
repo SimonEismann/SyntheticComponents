@@ -9,7 +9,12 @@ blocks:
   - name: "Build"
     task:
       jobs:
-      - name: Gradle build
+      - name: Checkout
         commands:
           - checkout
+      - name: Gradle build
+        commands:
           - gradle build
+      - name: Docker build
+        commands:
+          - docker build
