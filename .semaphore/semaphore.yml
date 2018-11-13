@@ -12,6 +12,6 @@ blocks:
       - name: Docker Build
         commands:
           - checkout
-          - cd SyntheticComponents
+          - ls
           - gradle build
           - docker build .
