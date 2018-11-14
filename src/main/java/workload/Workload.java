@@ -11,7 +11,7 @@ public abstract class Workload {
 	private Random rand = new Random();
 
 	protected String callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
-		URL url = new URL(ipAndPort + "/SyntheticComponents/index");
+		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
 		String result = "";
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
 		    for (String line; (line = reader.readLine()) != null;) {
