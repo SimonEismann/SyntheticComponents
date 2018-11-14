@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class ExpWorkload extends Workload {
 
-	private int lambda;
+	private double lambda;
 	private Random rand = new Random();
 	
 	public ExpWorkload(int delay) {
-		this.lambda = delay;
+		this.lambda = 1.0/(double)delay;
 	}
 	
 	@Override
