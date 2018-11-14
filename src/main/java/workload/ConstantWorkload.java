@@ -1,6 +1,6 @@
 package workload;
 
-public class ConstantWorkload implements Workload {
+public class ConstantWorkload extends Workload {
 
 	private int delay;
 	
@@ -10,7 +10,8 @@ public class ConstantWorkload implements Workload {
 	
 	@Override
 	public String performWork() {
-		return "Constant workload with delay of " + delay + " seconds";
+		double result = performWork(delay * 1000);
+		return "Constant workload with delay of " + delay + " seconds, result of " + result;
 	}
 
 }
