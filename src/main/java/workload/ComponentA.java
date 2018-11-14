@@ -5,6 +5,12 @@ import java.io.UnsupportedEncodingException;
 
 public class ComponentA extends Workload {
 		
+	public String ipB;
+	
+	public ComponentA(String ipB) {
+		this.ipB = ipB;
+	}
+	
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException {
 		double lambda = 3;
