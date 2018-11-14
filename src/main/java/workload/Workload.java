@@ -10,7 +10,7 @@ import java.util.Random;
 public abstract class Workload {
 	private Random rand = new Random();
 
-	protected double callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
+	protected String callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
 		URL url = new URL(ipAndPort + "/SyntheticComponents/index");
 		String result = "";
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
@@ -18,7 +18,7 @@ public abstract class Workload {
 		        result += line;
 		    }
 		}
-		return Double.parseDouble(result);
+		return result;
 	}
 	
 	protected double performExpWork(double lambda) {
