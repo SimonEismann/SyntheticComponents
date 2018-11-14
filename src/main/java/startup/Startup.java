@@ -10,6 +10,12 @@ import workload.ComponentA;
 public class Startup implements javax.servlet.ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent sce) {
-		IndexServlet.workload = new ComponentF();
+		String component = System.getenv("Component");
+		if (component.matches("A"))
+			IndexServlet.workload = new ComponentA();
+		if (component.matches("B"))
+			IndexServlet.workload = new ComponentB();
+		if (component.matches("F"))
+			IndexServlet.workload = new ComponentF();
 	}
 }
