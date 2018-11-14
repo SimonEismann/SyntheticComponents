@@ -9,3 +9,7 @@ repositories {
 dependencies {
 	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 }
+
+war {
+	webXml = file('WebContent/WEB-INF/web.xml') // copies a file to WEB-INF/web.xml
+}
