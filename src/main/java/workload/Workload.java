@@ -1,10 +1,26 @@
 package workload;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.Random;
 
 public abstract class Workload {
 	private Random rand = new Random();
 
+	protected double callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
+		URL url = new URL(ipAndPort + "/SyntheticComponents/index");
+		String result = "";
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+		    for (String line; (line = reader.readLine()) != null;) {
+		        result += line;
+		    }
+		}
+		return Double.parseDouble(result);
+	}
+	
 	protected double performExpWork(double lambda) {
 		double delay = Math.log(1-rand.nextDouble())/(-lambda) * 1000;
 		double result = performConstantWork(delay);
@@ -39,5 +55,5 @@ public abstract class Workload {
 		return sum;
 	}
 
-	public abstract String performWork();
+	public abstract String performWork() throws UnsupportedEncodingException, IOException;
 }
