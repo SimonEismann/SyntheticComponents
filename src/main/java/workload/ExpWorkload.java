@@ -1,5 +1,6 @@
 package workload;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class ExpWorkload extends Workload {
@@ -15,7 +16,7 @@ public class ExpWorkload extends Workload {
 	public String performWork() {
 		double delay = Math.log(1-rand.nextDouble())/(-lambda) * 1000;
 		double result = performWork(delay);
-		return "Exp workload with delay of " + delay + " seconds, result of " + result;
+		return "Exp workload with delay of " + new DecimalFormat("#0.00").format(delay/1000) + " seconds, result of " + result;
 	}
 
 }
