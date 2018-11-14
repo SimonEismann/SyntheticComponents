@@ -2,7 +2,7 @@ package workload;
 
 public abstract class Workload {
 
-	protected double performWork(int milliseconds) {
+	protected double performWork(double milliseconds) {
 		boolean plus = true;
 		double sum = 0;
 		double i = 1.0;
