@@ -7,15 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import workload.Workload;
+
+
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
+	
+	public static Workload workload = null;
 	private static final long serialVersionUID = 1L;
 
     public IndexServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String description = workload.performWork();
+		response.getWriter().append("Served as: ").append(description);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
