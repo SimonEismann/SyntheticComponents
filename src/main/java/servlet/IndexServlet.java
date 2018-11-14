@@ -21,7 +21,7 @@ public class IndexServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String description = workload.performWork();
-		response.getWriter().append("Served as: ").append(description);
+		response.getWriter().append(description);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
