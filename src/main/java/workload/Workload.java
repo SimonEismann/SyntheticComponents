@@ -21,6 +21,11 @@ public abstract class Workload {
 		return result;
 	}
 	
+	protected double performNormalWork(double mean, double std) {
+		double result = performConstantWork(rand.nextGaussian() * std + mean);
+		return result;
+	}
+	
 	protected double performExpWork(double lambda) {
 		double delay = Math.log(1-rand.nextDouble())/(-lambda) * 1000;
 		double result = performConstantWork(delay);

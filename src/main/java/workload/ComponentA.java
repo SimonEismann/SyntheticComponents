@@ -13,9 +13,8 @@ public class ComponentA extends Workload {
 	
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException {
-		double lambda = 3;
-		double result = performExpWork(lambda);
-		String result2 = callTo("http://10.1.3.48:2222");
+		double result = performExpWork(3);
+		String result2 = callTo(ipB);
 		return "Served at Component A! --> " + result + " --> " 
 				+ "\n\t"+ result2;
 	}
