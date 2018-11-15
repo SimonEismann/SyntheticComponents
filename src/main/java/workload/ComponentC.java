@@ -17,7 +17,7 @@ public class ComponentC extends Workload {
 		String resultS = "Served at Component C! --> " + result;
 		for (int i = 0; i < 5; i++) {
 			String result2 = callTo(ipD);
-			resultS += "\n\t" + result2;
+			resultS += "\n\t" + result2.replace("\t", "\t\t");
 		}
 		return resultS;
 	}
