@@ -26,11 +26,11 @@ public class ComponentE extends Workload {
 		while (true) {
 			boolean ok;
 			synchronized (lock) {
-				ok = count < limit - 1;
+				ok = count < limit;
 			}
 			if (ok) {
 				count++;
-				double result = performExpWork(30 * 1000);
+				double result = performExpWork(0.3 * 1000);
 				String result2 = callTo(ipF);
 				String result3 = callTo(ipG);
 				synchronized (lock) {
