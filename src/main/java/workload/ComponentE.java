@@ -18,7 +18,7 @@ public class ComponentE extends Workload {
 		double result = performExpWork(0.3 * 1000);
 		String result2 = callTo(ipF);
 		String result3 = callTo(ipG);
-		return "Served at Component B! --> " + result + "\n\t"+ result2.replace("\t", "\t\t")+ "\n\t"+ result3.replace("\t", "\t\t");
+		return "Served at Component E! --> " + result + "\n\t"+ result2.replace("\t", "\t\t")+ "\n\t"+ result3.replace("\t", "\t\t");
 	}
 
 }
