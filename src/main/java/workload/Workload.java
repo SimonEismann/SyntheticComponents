@@ -15,7 +15,7 @@ public abstract class Workload {
 		String result = "";
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
 		    for (String line; (line = reader.readLine()) != null;) {
-		        result += line;
+		        result += line + "\n";
 		    }
 		}
 		return result;
