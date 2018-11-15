@@ -7,10 +7,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Random;
 
+import servlet.LoggingExtCall1;
+import servlet.LoggingExtCall2;
+
 public abstract class Workload {
 	private Random rand = new Random();
 
-	protected String callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
+	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
+		long tic = System.currentTimeMillis();
 		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
 		String result = "";
 		boolean first = true;
@@ -23,6 +27,11 @@ public abstract class Workload {
 				result += line;
 			}
 		}
+		long toc = System.currentTimeMillis();
+		if (call1)
+			LoggingExtCall1.globalQueue.add(tic + "," + toc); 
+		else
+			LoggingExtCall2.globalQueue.add(tic + "," + toc); 
 		return result;
 	}
 

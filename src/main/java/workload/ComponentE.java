@@ -3,8 +3,6 @@ package workload;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import servlet.LoggingExtCall1;
-
 public class ComponentE extends Workload {
 	private static int limit = 2;
 	private static int count = 0;
@@ -33,11 +31,8 @@ public class ComponentE extends Workload {
 			if (ok) {
 				count++;
 				double result = performExpWork(0.3 * 1000);
-				long tic = System.currentTimeMillis();
-				String result2 = callTo(ipF);
-				long toc = System.currentTimeMillis();
-				LoggingExtCall1.globalQueue.add(tic + "," + toc); 
-				String result3 = callTo(ipG);
+				String result2 = callTo(ipF, true);
+				String result3 = callTo(ipG, false);
 				synchronized (lock) {
 					count--;
 				}
