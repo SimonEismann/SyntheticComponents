@@ -20,8 +20,13 @@ public class IndexServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String description = workload.performWork();
-		response.getWriter().append(description);
+		String description;
+		try {
+			description = workload.performWork();
+			response.getWriter().append(description);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

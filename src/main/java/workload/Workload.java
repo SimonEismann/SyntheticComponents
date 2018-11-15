@@ -65,5 +65,5 @@ public abstract class Workload {
 		return sum;
 	}
 
-	public abstract String performWork() throws UnsupportedEncodingException, IOException;
+	public abstract String performWork() throws UnsupportedEncodingException, IOException, InterruptedException;
 }
