@@ -28,13 +28,15 @@ public class ComponentE extends Workload {
 					count++;
 				}
 				double result = performExpWork(0.3 * 1000);
-				String result2 = callTo(ipF, true);
-				String result3 = callTo(ipG, false);
+//				String result2 = callTo(ipF, true);
+//				String result3 = callTo(ipG, false);
 				synchronized (lock) {
 					count--;
 				}
-				return "Served at Component E! --> " + result + "\n\t" + result2.replace("\t", "\t\t") + "\n\t"
-						+ result3.replace("\t", "\t\t");
+				return "could not reach service!";
+
+				//				return "Served at Component E! --> " + result + "\n\t" ;+ result2.replace("\t", "\t\t") + "\n\t"
+//						+ result3.replace("\t", "\t\t");
 			} else {
 				Thread.sleep(100);
 				return "could not reach service!";
