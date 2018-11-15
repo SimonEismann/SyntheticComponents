@@ -16,11 +16,6 @@ public class ComponentE extends Workload {
 		this.ipG = ipG;
 	}
 
-	public static void main(String[] args) throws UnsupportedEncodingException, IOException, InterruptedException {
-		ComponentE e = new ComponentE("10.1.3.48:6666", "10.1.3.48:7777");
-		e.performWork();
-	}
-
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException, InterruptedException {
 		while (true) {
