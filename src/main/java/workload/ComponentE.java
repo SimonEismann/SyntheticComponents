@@ -28,8 +28,8 @@ public class ComponentE extends Workload {
 					count++;
 				}
 //				double result = performExpWork(0.3 * 1000);
-//				String result2 = callTo(ipF, true);
-//				String result3 = callTo(ipG, false);
+				String result2 = callTo(ipF, true);
+				String result3 = callTo(ipG, false);
 				synchronized (lock) {
 					count--;
 				}
