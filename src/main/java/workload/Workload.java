@@ -13,21 +13,26 @@ public abstract class Workload {
 	protected String callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
 		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
 		String result = "";
+		boolean first = true;
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-		    for (String line; (line = reader.readLine()) != null;) {
-		        result += line + "\n";
-		    }
+			for (String line; (line = reader.readLine()) != null;) {
+				if (first)
+					first = false;
+				else
+					result += "\n";
+				result += line;
+			}
 		}
 		return result;
 	}
-	
+
 	protected double performNormalWork(double mean, double std) {
 		double result = performConstantWork(rand.nextGaussian() * std + mean);
 		return result;
 	}
-	
+
 	protected double performExpWork(double lambda) {
-		double delay = Math.log(1-rand.nextDouble())/(-lambda) * 1000;
+		double delay = Math.log(1 - rand.nextDouble()) / (-lambda) * 1000;
 		double result = performConstantWork(delay);
 		return result;
 	}
@@ -38,7 +43,7 @@ public abstract class Workload {
 		}
 		return performConstantWork(delayB);
 	}
-	
+
 	protected double performConstantWork(double milliseconds) {
 		boolean plus = true;
 		double sum = 0;
