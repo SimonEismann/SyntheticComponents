@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class ComponentE extends Workload {
-	private int limit = 2;
-	private int count = 0;
-	private Object lock = new Object();
+	private static int limit = 2;
+	private static int count = 0;
+	private static Object lock = new Object();
 
 	public String ipF;
 	public String ipG;
@@ -16,6 +16,11 @@ public class ComponentE extends Workload {
 		this.ipG = ipG;
 	}
 
+	public static void main(String[] args) throws UnsupportedEncodingException, IOException, InterruptedException {
+		ComponentE e = new ComponentE("10.1.3.48:6666", "10.1.3.48:7777");
+		e.performWork();
+	}
+
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException, InterruptedException {
 		while (true) {
@@ -23,21 +28,20 @@ public class ComponentE extends Workload {
 			synchronized (lock) {
 				ok = count < limit - 1;
 			}
-			while (!ok)
-				if (ok) {
-					count++;
-					double result = performConstantWork(30 * 1000);
-					String result2 = callTo(ipF);
-					String result3 = callTo(ipG);
-					synchronized (lock) {
-						count--;
-					}
-					return "Served at Component E! --> " + result + "\n\t" + result2.replace("\t", "\t\t") + "\n\t"
-							+ result3.replace("\t", "\t\t");
-				} else {
-					Thread.sleep(100);
-					return performWork();
+			if (ok) {
+				count++;
+				double result = performConstantWork(30 * 1000);
+				String result2 = callTo(ipF);
+				String result3 = callTo(ipG);
+				synchronized (lock) {
+					count--;
 				}
+				return "Served at Component E! --> " + result + "\n\t" + result2.replace("\t", "\t\t") + "\n\t"
+						+ result3.replace("\t", "\t\t");
+			} else {
+				Thread.sleep(100);
+				return performWork();
+			}
 		}
 	}
 
