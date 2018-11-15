@@ -33,7 +33,7 @@ public class ComponentE extends Workload {
 				synchronized (lock) {
 					count--;
 				}
-				return "could not reach service!";
+				return "reach service!";
 
 				//				return "Served at Component E! --> " + result + "\n\t" ;+ result2.replace("\t", "\t\t") + "\n\t"
 //						+ result3.replace("\t", "\t\t");
