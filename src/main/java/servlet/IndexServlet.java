@@ -20,7 +20,6 @@ public class IndexServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long tic = System.currentTimeMillis();
 		String description;
 		try {
 			description = workload.performWork();
@@ -28,8 +27,6 @@ public class IndexServlet extends HttpServlet {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		long toc  = System.currentTimeMillis();
-		response.getWriter().append("\n" + (toc-tic));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
