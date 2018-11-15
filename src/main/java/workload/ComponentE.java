@@ -37,7 +37,8 @@ public class ComponentE extends Workload {
 						+ result3.replace("\t", "\t\t");
 			} else {
 				Thread.sleep(100);
-				return performWork();
+				return "could not reach service!";
+//				return performWork();
 			}
 		}
 	}
