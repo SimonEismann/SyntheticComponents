@@ -30,7 +30,7 @@ public class ComponentE extends Workload {
 			}
 			if (ok) {
 				count++;
-				double result = performConstantWork(30 * 1000);
+				double result = performExpWork(30 * 1000);
 				String result2 = callTo(ipF);
 				String result3 = callTo(ipG);
 				synchronized (lock) {
