@@ -27,7 +27,7 @@ public class ComponentE extends Workload {
 				synchronized (lock) {
 					count++;
 				}
-				double result = performExpWork(0.015 * 1000);
+				double result = performExpWork(0.005 * 1000);
 				String result2 = callTo(ipF, true);
 				String result3 = callTo(ipG, false);
 				synchronized (lock) {
