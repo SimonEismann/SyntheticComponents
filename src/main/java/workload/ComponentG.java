@@ -4,7 +4,7 @@ public class ComponentG extends Workload {
 	
 	@Override
 	public String performWork() {
-		double result = performExpWork(0.4);
+		double result = performExpWork(0.04);
 		return "Served at Component G! --> " + result;
 	}
 
