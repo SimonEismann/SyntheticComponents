@@ -13,7 +13,7 @@ public class ComponentA extends Workload {
 	
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException {
-		double result = performExpWork(0.015);
+		double result = performExpWork(0.015 * 1000);
 		String result2 = callTo(ipB, true);
 		return "Served at Component A! --> " + result + "\n\t"+ result2.replace("\t", "\t\t");
 	}

@@ -42,7 +42,7 @@ public abstract class Workload {
 
 	protected double performExpWork(double mean) {
 		double lambda = 1 / mean;
-		double delay = Math.log(1 - rand.nextDouble()) / (-lambda) * 1000;
+		double delay = Math.log(1 - rand.nextDouble()) / (-lambda);
 		double result = performConstantWork(delay);
 		return result;
 	}
