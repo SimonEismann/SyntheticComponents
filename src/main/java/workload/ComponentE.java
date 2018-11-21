@@ -15,7 +15,7 @@ public class ComponentE extends Workload {
 
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException, InterruptedException {
-		double result = performExpWork(0.0005 * 1000);
+		double result = performExpWork(0.005 * 1000);
 		String result2 = callTo(ipF, true);
 		String result3 = callTo(ipG, false);
 		return "Served at Component E! --> " + result + "\n\t" + result2.replace("\t", "\t\t") + "\n\t"
