@@ -29,7 +29,7 @@ public abstract class Workload {
 				result += line;
 			}
 		}
-		long toc = System.currentTimeMillis();
+		long toc = System.nanoTime();
 		if (call1)
 			LoggingExtCall1.globalQueue.add(tic + "," + toc); 
 		else
