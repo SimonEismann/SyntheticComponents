@@ -58,7 +58,7 @@ public abstract class Workload {
 		boolean plus = true;
 		double sum = 0;
 		double i = 1.0;
-		long start = System.currentTimeMillis();
+		long start = System.nanoTime();
 		while (true) {
 			if (plus) {
 				sum += 1.0 / i;
@@ -68,7 +68,7 @@ public abstract class Workload {
 				plus = true;
 			}
 			i += 2.0;
-			if (System.currentTimeMillis() - start > milliseconds)
+			if (System.nanoTime() - start > milliseconds * 1000)
 				break;
 		}
 		sum *= 4;
