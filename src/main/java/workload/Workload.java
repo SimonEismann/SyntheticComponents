@@ -16,7 +16,7 @@ public abstract class Workload {
 	private static Semaphore sem = new Semaphore(2);
 	
 	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
-		long tic = System.currentTimeMillis();
+		long tic = System.nanoTime();
 		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
 		String result = "";
 		boolean first = true;
