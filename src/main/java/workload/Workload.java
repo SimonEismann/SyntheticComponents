@@ -54,7 +54,7 @@ public abstract class Workload {
 		return performConstantWork(delayB);
 	}
 
-	protected double performConstantWork(double milliseconds) {
+	synchronized protected double performConstantWork(double milliseconds) {
 		long start = System.nanoTime();
 		while (true) {
 			if (System.nanoTime() - start > milliseconds * 1000000)
