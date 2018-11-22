@@ -55,24 +55,12 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
-		boolean plus = true;
-		double sum = 0;
-		double i = 1.0;
 		long start = System.nanoTime();
 		while (true) {
-			if (plus) {
-				sum += 1.0 / i;
-				plus = false;
-			} else {
-				sum -= 1.0 / i;
-				plus = true;
-			}
-			i += 2.0;
 			if (System.nanoTime() - start > milliseconds * 1000000)
 				break;
 		}
-		sum *= 4;
-		return sum;
+		return 1;
 	}
 
 	public abstract String performWork() throws UnsupportedEncodingException, IOException, InterruptedException;
