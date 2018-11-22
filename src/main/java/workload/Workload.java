@@ -14,7 +14,7 @@ import servlet.LoggingExtCall2;
 public abstract class Workload {
 	private Random rand = new Random();
 	private static Semaphore sem = new Semaphore(2);
-
+	
 	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
 		long tic = System.currentTimeMillis();
 		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
@@ -38,13 +38,7 @@ public abstract class Workload {
 	}
 
 	protected double performNormalWork(double mean, double std) {
-		try {
-			sem.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		double result = performConstantWork(rand.nextGaussian() * std + mean);
-		sem.release();
 		return result;
 	}
 
@@ -62,12 +56,18 @@ public abstract class Workload {
 		return performConstantWork(delayB);
 	}
 
-	synchronized protected double performConstantWork(double milliseconds) {
+	protected double performConstantWork(double milliseconds) {
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		long start = System.nanoTime();
 		while (true) {
 			if (System.nanoTime() - start > milliseconds * 1000000)
 				break;
 		}
+		sem.release();
 		return 1;
 	}
 
