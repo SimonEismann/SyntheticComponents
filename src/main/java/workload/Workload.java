@@ -6,12 +6,14 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 import servlet.LoggingExtCall1;
 import servlet.LoggingExtCall2;
 
 public abstract class Workload {
 	private Random rand = new Random();
+	private static Semaphore sem = new Semaphore(2);
 
 	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
 		long tic = System.currentTimeMillis();
@@ -36,7 +38,13 @@ public abstract class Workload {
 	}
 
 	protected double performNormalWork(double mean, double std) {
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		double result = performConstantWork(rand.nextGaussian() * std + mean);
+		sem.release();
 		return result;
 	}
 
