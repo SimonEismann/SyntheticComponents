@@ -68,7 +68,7 @@ public abstract class Workload {
 				plus = true;
 			}
 			i += 2.0;
-			if (System.nanoTime() - start > milliseconds * 1000)
+			if (System.nanoTime() - start > milliseconds * 1000000)
 				break;
 		}
 		sum *= 4;
