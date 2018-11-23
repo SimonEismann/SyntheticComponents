@@ -58,21 +58,16 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
-		try {
 			long tic = System.nanoTime();
-			sem.acquire();
 			long start = System.nanoTime();
 			while (true) {
+				System.out.println("working!");
 				if (System.nanoTime() - start > milliseconds * 1000000)
 					break;
 			}
 			long toc = System.nanoTime();
 			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc );
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			sem.release();
-		}
+
 		return 1;
 	}
 
