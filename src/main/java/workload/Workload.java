@@ -10,6 +10,7 @@ import java.util.concurrent.Semaphore;
 
 import servlet.LoggingExtCall1;
 import servlet.LoggingExtCall2;
+import servlet.LoggingInternal;
 
 public abstract class Workload {
 	private Random rand = new Random();
@@ -57,6 +58,7 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
+		long tic = System.nanoTime();
 		try {
 			sem.acquire();
 		} catch (InterruptedException e) {
@@ -68,6 +70,8 @@ public abstract class Workload {
 				break;
 		}
 		sem.release();
+		long toc = System.nanoTime();
+		LoggingInternal.globalQueue.add((toc - tic) + "");
 		return 1;
 	}
 
