@@ -60,9 +60,11 @@ public abstract class Workload {
 	protected double performConstantWork(double milliseconds) {
 			long tic = System.nanoTime();
 			long start = System.nanoTime();
+			long time = System.nanoTime();
 			while (true) {
-				System.out.println("working!");
-				if (System.nanoTime() - start > milliseconds * 1000000)
+				System.out.println(time);
+				time = System.nanoTime();
+				if (time - start > milliseconds * 1000000)
 					break;
 			}
 			long toc = System.nanoTime();
