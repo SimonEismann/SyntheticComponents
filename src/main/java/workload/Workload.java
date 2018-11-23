@@ -15,7 +15,7 @@ import servlet.LoggingInternal;
 public abstract class Workload {
 	private Random rand = new Random();
 	private static Semaphore sem = new Semaphore(2);
-	
+
 	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
 		long tic = System.nanoTime();
 		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
@@ -32,9 +32,9 @@ public abstract class Workload {
 		}
 		long toc = System.nanoTime();
 		if (call1)
-			LoggingExtCall1.globalQueue.add(tic + "," + toc); 
+			LoggingExtCall1.globalQueue.add(tic + "," + toc);
 		else
-			LoggingExtCall2.globalQueue.add(tic + "," + toc); 
+			LoggingExtCall2.globalQueue.add(tic + "," + toc);
 		return result;
 	}
 
@@ -60,18 +60,19 @@ public abstract class Workload {
 	protected double performConstantWork(double milliseconds) {
 		try {
 			sem.acquire();
+			long tic = System.nanoTime();
+			long start = System.nanoTime();
+			while (true) {
+				if (System.nanoTime() - start > milliseconds * 1000000)
+					break;
+			}
+			long toc = System.nanoTime();
+			LoggingInternal.globalQueue.add((toc - tic) + "");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} finally {
+			sem.release();
 		}
-		long tic = System.nanoTime();
-		long start = System.nanoTime();
-		while (true) {
-			if (System.nanoTime() - start > milliseconds * 1000000)
-				break;
-		}
-		long toc = System.nanoTime();
-		sem.release();
-		LoggingInternal.globalQueue.add((toc - tic) + "");
 		return 1;
 	}
 
