@@ -59,8 +59,8 @@ public abstract class Workload {
 
 	protected double performConstantWork(double milliseconds) {
 		try {
-			sem.acquire();
 			long tic = System.nanoTime();
+			sem.acquire();
 			long start = System.nanoTime();
 			while (true) {
 				if (System.nanoTime() - start > milliseconds * 1000000)
