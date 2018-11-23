@@ -22,6 +22,7 @@ public class LogResetServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LoggingExtCall1.globalQueue.clear();
 		LoggingExtCall2.globalQueue.clear();
+		LoggingInternal.globalQueue.clear();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
