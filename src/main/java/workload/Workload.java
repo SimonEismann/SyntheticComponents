@@ -1,11 +1,8 @@
 package workload;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Random;
@@ -61,29 +58,19 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
-	     try {
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new
-			         FileOutputStream(java.io.FileDescriptor.out), "ASCII"), 512);
 			long tic = System.nanoTime();
-			long start = System.nanoTime();
-			long time = System.nanoTime();
-			while (true) {
-				out.write("" + time);
-				time = System.nanoTime();
-				if (time - start > milliseconds * 1000000)
-					break;
+			WorkerThread worker = new WorkerThread();
+			Thread thread = new Thread(worker);
+			thread.start();
+			try {
+				Thread.sleep((long) milliseconds);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		    out.flush();
-		    out.close();
+			worker.interupted = true;
 			long toc = System.nanoTime();
 			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc );
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		return 1;
 	}
 
