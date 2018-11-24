@@ -62,6 +62,7 @@ public abstract class Workload {
 			WorkerThread worker = new WorkerThread();
 			Thread thread = new Thread(worker);
 			thread.start();
+			long tac = System.nanoTime();
 			try {
 				Thread.sleep((long) milliseconds);
 			} catch (InterruptedException e) {
@@ -70,7 +71,7 @@ public abstract class Workload {
 			}
 			worker.interupted = true;
 			long toc = System.nanoTime();
-			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc );
+			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc + "," + tac );
 		return 1;
 	}
 
