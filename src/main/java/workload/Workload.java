@@ -74,7 +74,6 @@ public abstract class Workload {
 					break;
 			}
 		    out.flush();
-		    out.close();
 			long toc = System.nanoTime();
 			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc );
 			} catch (UnsupportedEncodingException e) {
