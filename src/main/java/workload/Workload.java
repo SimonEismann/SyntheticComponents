@@ -14,7 +14,7 @@ import servlet.LoggingInternal;
 
 public abstract class Workload {
 	private Random rand = new Random();
-	private static Semaphore sem = new Semaphore(2);
+	private static Semaphore sem = new Semaphore(2, true);
 
 	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
 		long tic = System.nanoTime();
