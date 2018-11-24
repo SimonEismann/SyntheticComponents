@@ -69,7 +69,7 @@ public abstract class Workload {
 			long toc = System.nanoTime();
 			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc + "," + (toc - start));
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		} finally {
 			sem.release();
 		}
