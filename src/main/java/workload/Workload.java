@@ -58,20 +58,22 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
-			long tic = System.nanoTime();
-			WorkerThread worker = new WorkerThread();
-			Thread thread = new Thread(worker);
-			thread.start();
-			long tac = System.nanoTime();
+		long tic = System.nanoTime();
+		WorkerThread worker = new WorkerThread();
+		Thread thread = new Thread(worker);
+		thread.start();
+		long tac = System.nanoTime();
+		long sleep = ((long) milliseconds - (tac - tic) / 1000000);
+		if (sleep > 0) {
 			try {
-				Thread.sleep(((long) milliseconds - (tac-tic)/1000000));
+				Thread.sleep(sleep);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			worker.interupted = true;
-			long toc = System.nanoTime();
-			LoggingInternal.globalQueue.add((toc-tic) + "," + tic + "," + toc + "," + tac );
+		}
+		worker.interupted = true;
+		long toc = System.nanoTime();
+		LoggingInternal.globalQueue.add((toc - tic) + "," + tic + "," + toc + "," + tac);
 		return 1;
 	}
 
