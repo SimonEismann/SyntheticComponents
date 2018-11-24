@@ -64,7 +64,7 @@ public abstract class Workload {
 			thread.start();
 			long tac = System.nanoTime();
 			try {
-				Thread.sleep((long) milliseconds);
+				Thread.sleep(((long) milliseconds - (tac-tic)*1000000));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
