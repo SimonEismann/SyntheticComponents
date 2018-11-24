@@ -31,7 +31,7 @@ public abstract class Workload {
 			}
 		}
 		long toc = System.nanoTime();
-		if (call1)
+		if (call1) 
 			LoggingExtCall1.globalQueue.add(tic + "," + toc);
 		else
 			LoggingExtCall2.globalQueue.add(tic + "," + toc);
