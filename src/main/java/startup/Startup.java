@@ -9,6 +9,7 @@ import workload.ComponentD;
 import workload.ComponentE;
 import workload.ComponentF;
 import workload.ComponentG;
+import workload.Proxy;
 import workload.ComponentA;
 
 public class Startup implements javax.servlet.ServletContextListener {
@@ -29,5 +30,7 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServlet.workload = new ComponentF();
 		if (component.matches("G"))
 			IndexServlet.workload = new ComponentG();
+		if (component.matches("Proxy"))
+			IndexServlet.workload = new Proxy(System.getenv("IP_A"));
 	}
 }
