@@ -15,6 +15,6 @@ blocks:
           - ls
           - gradle build
           - docker build . -t comp
-          - docker tag comp simoneismann/syntheticcomponents
+          - docker tag comp simoneismann/syntheticcomponents:librede
           - docker login -u="simoneismann" -p="saki1234"
-          - docker push simoneismann/syntheticcomponents
+          - docker push simoneismann/syntheticcomponents:librede
