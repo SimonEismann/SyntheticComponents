@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/wc3")
 public class WC3Servlet extends HttpServlet {
 	private Random rand = new Random();
+	private static Semaphore sem = new Semaphore(1, false);
 	
 	private static final long serialVersionUID = 1L;
 
