@@ -55,8 +55,6 @@ public class WC3Servlet extends HttpServlet {
 				if (System.nanoTime() - start > milliseconds * 1000000)
 					break;
 			}
-			long toc = System.nanoTime();
-			LoggingInternal.globalQueue.add((toc - tic) + "," + sem.getQueueLength() + "," + tic + "," + (toc - start));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {

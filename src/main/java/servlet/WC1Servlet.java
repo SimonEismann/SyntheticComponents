@@ -51,7 +51,6 @@ public class WC1Servlet extends HttpServlet {
 					break;
 			}
 			long toc = System.nanoTime();
-			LoggingInternal.globalQueue.add((toc - tic) + "," + sem.getQueueLength() + "," + tic + "," + (toc - start));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
