@@ -22,12 +22,8 @@ public class WC1Servlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
 			performExpWork(0.025 * 1000);
 			response.getWriter().append("WC1:25ms");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -22,12 +22,8 @@ public class WC2Servlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
 			performExpWork(0.08 * 1000);
 			response.getWriter().append("WC2:80ms");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

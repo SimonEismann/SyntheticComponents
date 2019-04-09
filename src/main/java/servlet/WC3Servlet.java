@@ -22,12 +22,8 @@ public class WC3Servlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
 			performNormalWork(0.010 * 1000, 0.002 * 1000);
 			response.getWriter().append("WC3:10ms+-2ms");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
