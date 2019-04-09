@@ -22,7 +22,7 @@ public class WC1Servlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		performConstantWork(25 * 1000);
+			performExpWork(0.025 * 1000);
 			response.getWriter().append("WC1:25ms");
 	}
 
