@@ -8,6 +8,8 @@ agent:
 blocks:
   - name: "Build"
     task:
+      secrets:
+        - name: dockerhub
       jobs:
       - name: Docker Build
         commands:
