@@ -9,7 +9,7 @@ blocks:
   - name: "Build"
     task:
       secrets:
-        - name: dockerhub
+        - name: Dockerhub
       jobs:
       - name: Docker Build
         commands:
