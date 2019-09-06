@@ -16,5 +16,5 @@ blocks:
           - gradle build
           - docker build . -t comp
           - docker tag comp simoneismann/syntheticcomponents
-          - docker login -u="simoneismann" -p="saki1234"
+          - docker login -u="$username" -p="$password"
           - docker push simoneismann/syntheticcomponents
