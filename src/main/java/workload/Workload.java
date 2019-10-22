@@ -5,8 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Random;
-import java.util.concurrent.Semaphore;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 import servlet.LoggingExtCall1;
 import servlet.LoggingExtCall2;
@@ -14,7 +24,41 @@ import servlet.LoggingInternal;
 
 public abstract class Workload {
 	private Random rand = new Random();
-	private static Semaphore sem = new Semaphore(2, false);
+	private Cipher cipher;
+	private static SecretKeySpec secretKey;
+	private static byte[] key;
+
+	public Workload() {
+		try {
+			setKey(String.valueOf(System.currentTimeMillis()));
+			cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new IllegalStateException();
+		} catch (NoSuchPaddingException e) {
+			e.printStackTrace();
+			throw new IllegalStateException();
+		} catch (InvalidKeyException e) {
+			e.printStackTrace();
+			throw new IllegalStateException();
+		}
+	}
+
+	public static void setKey(String myKey) {
+		MessageDigest sha = null;
+		try {
+			key = myKey.getBytes("UTF-8");
+			sha = MessageDigest.getInstance("SHA-1");
+			key = sha.digest(key);
+			key = Arrays.copyOf(key, 16);
+			secretKey = new SecretKeySpec(key, "AES");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
 		long tic = System.nanoTime();
@@ -58,21 +102,26 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
-		try {
-			long tic = System.nanoTime();
-			sem.acquire();
-			long start = System.nanoTime();
-			while (true) {
-				if (System.nanoTime() - start > milliseconds * 1000000)
-					break;
+		long start = System.nanoTime();
+		String encryptme = String.valueOf(System.currentTimeMillis());
+		while (true) {
+			try {
+				Base64.getEncoder().encodeToString(cipher.doFinal(encryptme.getBytes("UTF-8")));
+			} catch (IllegalBlockSizeException e) {
+				e.printStackTrace();
+				throw new IllegalStateException();
+			} catch (BadPaddingException e) {
+				e.printStackTrace();
+				throw new IllegalStateException();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				throw new IllegalStateException();
 			}
-			long toc = System.nanoTime();
-			LoggingInternal.globalQueue.add((toc-tic) + "," + sem.getQueueLength() + "," + tic + "," + (toc - start));
-		} catch (InterruptedException e) {
-			e.printStackTrace(); 
-		} finally {
-			sem.release();
+			if (System.nanoTime() - start > milliseconds * 1000000)
+				break;
 		}
+		long end = System.nanoTime();
+		LoggingInternal.globalQueue.add((end - start) + "," + start + "," + end);
 		return 1;
 	}
 
