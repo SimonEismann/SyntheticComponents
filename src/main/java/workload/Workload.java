@@ -120,6 +120,7 @@ public abstract class Workload {
 				throw new IllegalStateException();
 			}
 			if (System.nanoTime() - start > milliseconds * 1000000)
+				System.out.println(System.nanoTime() - start - milliseconds * 1000000);
 				break;
 		}
 		long end = System.nanoTime();
