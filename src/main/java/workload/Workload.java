@@ -9,7 +9,6 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Random;
 
 import javax.crypto.BadPaddingException;
@@ -103,17 +102,20 @@ public abstract class Workload {
 
 	protected double performConstantWork(double milliseconds) {
 		long start = System.nanoTime();
-		String encryptme = String.valueOf(System.currentTimeMillis());
+		byte[] encryptme;
+		try {
+			encryptme = String.valueOf(System.currentTimeMillis()).getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+			throw new IllegalStateException();
+		}
 		while (true) {
 			try {
-				Base64.getEncoder().encodeToString(cipher.doFinal(encryptme.getBytes("UTF-8")));
+				encryptme = cipher.doFinal(encryptme);
 			} catch (IllegalBlockSizeException e) {
 				e.printStackTrace();
 				throw new IllegalStateException();
 			} catch (BadPaddingException e) {
-				e.printStackTrace();
-				throw new IllegalStateException();
-			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 				throw new IllegalStateException();
 			}
