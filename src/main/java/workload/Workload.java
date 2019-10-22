@@ -125,7 +125,8 @@ public abstract class Workload {
 		}
 		long end = System.nanoTime();
 		LoggingInternal.globalQueue
-				.add(milliseconds + "," + (end - start) + "," + (milliseconds - end + start) + "," + start + "," + end);
+				.add(Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+						+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
 		return 1;
 	}
 
