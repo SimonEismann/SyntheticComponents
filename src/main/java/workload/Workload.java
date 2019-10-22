@@ -103,6 +103,7 @@ public abstract class Workload {
 	protected double performConstantWork(double milliseconds) {
 		long start = System.nanoTime();
 		byte[] encryptme;
+		int i = 0;
 		try {
 			encryptme = String.valueOf(System.currentTimeMillis()).getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -119,13 +120,14 @@ public abstract class Workload {
 				e.printStackTrace();
 				throw new IllegalStateException();
 			}
+			i++;
 			if (System.nanoTime() - start > milliseconds * 1000000)
 				System.out.println(System.nanoTime() - start - milliseconds * 1000000);
 				break;
 		}
 		long end = System.nanoTime();
 		LoggingInternal.globalQueue
-				.add(Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+				.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
 						+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
 		return 1;
 	}
