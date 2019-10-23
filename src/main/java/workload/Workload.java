@@ -104,6 +104,7 @@ public abstract class Workload {
 		long start = System.nanoTime();
 		byte[] encryptme;
 		int i = 0;
+		long passedTime = 0;
 		try {
 			encryptme = String.valueOf(System.currentTimeMillis()).getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -121,7 +122,10 @@ public abstract class Workload {
 				throw new IllegalStateException();
 			}
 			i++;
-			if (System.nanoTime() - start > milliseconds * 1000000)
+			long tmp = System.nanoTime();
+			passedTime += tmp - start;
+			start = tmp;
+			if (passedTime > milliseconds * 1000000)
 				break;
 		}
 		long end = System.nanoTime();
