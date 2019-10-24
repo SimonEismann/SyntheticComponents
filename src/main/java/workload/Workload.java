@@ -17,8 +17,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import servlet.LoggingExtCall1;
-import servlet.LoggingExtCall2;
+import servlet.LoggingExtCallA;
+import servlet.LoggingExtCallB;
+import servlet.LoggingExtCallC;
+import servlet.LoggingExtCallD;
+import servlet.LoggingExtCallE;
+import servlet.LoggingExtCallF;
+import servlet.LoggingExtCallG;
 import servlet.LoggingInternal;
 
 public abstract class Workload {
@@ -59,9 +64,9 @@ public abstract class Workload {
 		}
 	}
 
-	protected String callTo(String ipAndPort, boolean call1) throws UnsupportedEncodingException, IOException {
+	protected String callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
 		long tic = System.nanoTime();
-		URL url = new URL("http://" + ipAndPort + "/SyntheticComponents/index");
+		URL url = new URL("http://" + ipAndPort);
 		String result = "";
 		boolean first = true;
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
@@ -74,10 +79,31 @@ public abstract class Workload {
 			}
 		}
 		long toc = System.nanoTime();
-		if (call1) 
-			LoggingExtCall1.globalQueue.add(tic + "," + toc);
-		else
-			LoggingExtCall2.globalQueue.add(tic + "," + toc);
+		switch (ipAndPort.charAt(ipAndPort.length() - 1)){
+			case 'A':
+				LoggingExtCallA.globalQueue.add(tic + "," + toc);
+				break;
+			case 'B':
+				LoggingExtCallB.globalQueue.add(tic + "," + toc);
+				break;
+			case 'C':
+				LoggingExtCallC.globalQueue.add(tic + "," + toc);
+				break;
+			case 'D':
+				LoggingExtCallD.globalQueue.add(tic + "," + toc);
+				break;
+			case 'E':
+				LoggingExtCallE.globalQueue.add(tic + "," + toc);
+				break;
+			case 'F':
+				LoggingExtCallF.globalQueue.add(tic + "," + toc);
+				break;
+			case 'G':
+				LoggingExtCallG.globalQueue.add(tic + "," + toc);
+				break;
+			default:
+				throw new IllegalStateException("Component type doesn't match");
+		}
 		return result;
 	}
 

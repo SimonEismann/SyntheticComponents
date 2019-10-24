@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import workload.Workload;
 
 
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/indexB")
+public class IndexServletB extends HttpServlet {
 	
 	public static Workload workload = null;
 	private static final long serialVersionUID = 1L;
 
-    public IndexServlet() {
+    public IndexServletB() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

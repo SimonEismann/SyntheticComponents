@@ -2,7 +2,13 @@ package startup;
 
 import javax.servlet.ServletContextEvent;
 
-import servlet.IndexServlet;
+import servlet.IndexServletA;
+import servlet.IndexServletB;
+import servlet.IndexServletC;
+import servlet.IndexServletD;
+import servlet.IndexServletE;
+import servlet.IndexServletF;
+import servlet.IndexServletG;
 import workload.ComponentB;
 import workload.ComponentC;
 import workload.ComponentD;
@@ -16,21 +22,33 @@ public class Startup implements javax.servlet.ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent sce) {
 		String component = System.getenv("Component");
-		if (component.matches("A"))
-			IndexServlet.workload = new ComponentA(System.getenv("IP_B"));
-		if (component.matches("B"))
-			IndexServlet.workload = new ComponentB(System.getenv("IP_C"), System.getenv("IP_E"));
-		if (component.matches("C"))
-			IndexServlet.workload = new ComponentC(System.getenv("IP_D"));
-		if (component.matches("D"))
-			IndexServlet.workload = new ComponentD();
-		if (component.matches("E"))
-			IndexServlet.workload = new ComponentE(System.getenv("IP_F"), System.getenv("IP_G"));
-		if (component.matches("F"))
-			IndexServlet.workload = new ComponentF();
-		if (component.matches("G"))
-			IndexServlet.workload = new ComponentG();
-		if (component.matches("Proxy"))
-			IndexServlet.workload = new Proxy(System.getenv("IP_A"));
+		if (component.equals("A")) {
+			IndexServletA.workload = new ComponentA(System.getenv("IP_B") + "/SyntheticComponents/indexB");
+		} else if (component.equals("B")) {
+			IndexServletB.workload = new ComponentB(System.getenv("IP_C") + "/SyntheticComponents/indexC", System.getenv("IP_E") + "/SyntheticComponents/indexE");
+		} else if (component.equals("C")) {
+			IndexServletC.workload = new ComponentC(System.getenv("IP_D") + "/SyntheticComponents/indexD");
+		} else if (component.equals("D")) {
+			IndexServletD.workload = new ComponentD();
+		} else if (component.equals("E")) {
+			IndexServletE.workload = new ComponentE(System.getenv("IP_F") + "/SyntheticComponents/indexF", System.getenv("IP_G") + "/SyntheticComponents/indexG");
+		} else if (component.equals("F")) {
+			IndexServletF.workload = new ComponentF();
+		} else if (component.equals("G")) {
+			IndexServletG.workload = new ComponentG();
+		} else if (component.equals("Proxy")) {
+			IndexServletA.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA");	//proxy also on indexA
+		} else if (component.equals("FG")) {
+			IndexServletF.workload = new ComponentF();
+			IndexServletG.workload = new ComponentG();
+		} else if (component.equals("BEFG")) {
+			IndexServletF.workload = new ComponentF();
+			IndexServletG.workload = new ComponentG();
+			IndexServletE.workload = new ComponentE("localhost:8080/SyntheticComponents/indexF", "localhost:8080/SyntheticComponents/indexG");
+			IndexServletB.workload = new ComponentB(System.getenv("IP_C") + "/SyntheticComponents/indexC", "localhost:8080/SyntheticComponents/indexE");
+		} else if (component.equals("DG")) {
+			IndexServletD.workload = new ComponentD();
+			IndexServletG.workload = new ComponentG();
+		}
 	}
 }

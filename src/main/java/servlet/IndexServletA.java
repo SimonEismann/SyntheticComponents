@@ -10,24 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import workload.Workload;
 
 
-@WebServlet("/reset")
-public class LogResetServlet extends HttpServlet {
+@WebServlet("/indexA")
+public class IndexServletA extends HttpServlet {
 	
 	public static Workload workload = null;
 	private static final long serialVersionUID = 1L;
 
-    public LogResetServlet() {
+    public IndexServletA() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LoggingExtCallA.globalQueue.clear();
-		LoggingExtCallB.globalQueue.clear();
-		LoggingExtCallC.globalQueue.clear();
-		LoggingExtCallD.globalQueue.clear();
-		LoggingExtCallE.globalQueue.clear();
-		LoggingExtCallF.globalQueue.clear();
-		LoggingExtCallG.globalQueue.clear();
-		LoggingInternal.globalQueue.clear();
+		String description;
+		try {
+			description = workload.performWork();
+			response.getWriter().append(description);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

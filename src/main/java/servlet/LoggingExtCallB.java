@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ext2")
-public class LoggingExtCall2 extends HttpServlet {
+@WebServlet("/extB")
+public class LoggingExtCallB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static Queue<String> globalQueue = new ConcurrentLinkedQueue<String>();
 	
-    public LoggingExtCall2() {
+    public LoggingExtCallB() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

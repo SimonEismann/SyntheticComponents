@@ -13,7 +13,7 @@ public class Proxy extends Workload {
 	
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException {
-		String result2 = callTo(ipA, true);
+		String result2 = callTo(ipA);
 		return "Served at Proxy! \n\t"+ result2.replace("\t", "\t\t");
 	}
 
