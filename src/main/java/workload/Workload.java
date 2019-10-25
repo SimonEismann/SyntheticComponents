@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -27,6 +28,8 @@ import servlet.LoggingExtCallG;
 import servlet.LoggingInternal;
 
 public abstract class Workload {
+	private static Semaphore semaphore = new Semaphore(2, false);
+	
 	private Random rand = new Random();
 	private Cipher cipher;
 	private static SecretKeySpec secretKey;
@@ -127,37 +130,44 @@ public abstract class Workload {
 	}
 
 	protected double performConstantWork(double milliseconds) {
-		long start = System.nanoTime();
-		byte[] encryptme;
-		int i = 0;
-		long passedTime = 0;
 		try {
-			encryptme = String.valueOf(System.currentTimeMillis()).getBytes("UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-			throw new IllegalStateException();
-		}
-		while (true) {
+			long start = System.nanoTime();
+			semaphore.acquire();
+			byte[] encryptme;
+			int i = 0;
+			long passedTime = 0;
 			try {
-				encryptme = cipher.doFinal(encryptme);
-			} catch (IllegalBlockSizeException e) {
-				e.printStackTrace();
-				throw new IllegalStateException();
-			} catch (BadPaddingException e) {
-				e.printStackTrace();
+				encryptme = String.valueOf(System.currentTimeMillis()).getBytes("UTF-8");
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
 				throw new IllegalStateException();
 			}
-			i++;
-			long tmp = System.nanoTime();
-			passedTime += tmp - start;
-			start = tmp;
-			if (passedTime > milliseconds * 1000000)
-				break;
+			while (true) {
+				try {
+					encryptme = cipher.doFinal(encryptme);
+				} catch (IllegalBlockSizeException e) {
+					e.printStackTrace();
+					throw new IllegalStateException();
+				} catch (BadPaddingException e) {
+					e.printStackTrace();
+					throw new IllegalStateException();
+				}
+				i++;
+				long tmp = System.nanoTime();
+				passedTime += tmp - start;
+				start = tmp;
+				if (passedTime > milliseconds * 1000000)
+					break;
+			}
+			long end = System.nanoTime();
+			LoggingInternal.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}finally {
+			semaphore.release();
 		}
-		long end = System.nanoTime();
-		LoggingInternal.globalQueue
-				.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
-						+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
 		return 1;
 	}
 
