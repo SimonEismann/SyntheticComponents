@@ -28,7 +28,7 @@ import servlet.LoggingExtCallG;
 import servlet.LoggingInternal;
 
 public abstract class Workload {
-	private static Semaphore semaphore = new Semaphore(1, false);
+	private static Semaphore semaphore = new Semaphore(2, false);
 	
 	private Random rand = new Random();
 	private Cipher cipher;
