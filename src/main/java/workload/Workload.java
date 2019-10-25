@@ -5,18 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
 
 import servlet.LoggingExtCallA;
 import servlet.LoggingExtCallB;
@@ -34,44 +24,9 @@ import servlet.LoggingInternalF;
 import servlet.LoggingInternalG;
 
 public abstract class Workload {
-	private static Semaphore semaphore = new Semaphore(2, false);
+	private static Semaphore semaphore = new Semaphore(2, false);	//TODO: fuer mehr kerne als variable durchreichen -> coloc_all
 	
 	private Random rand = new Random();
-	private Cipher cipher;
-	private static SecretKeySpec secretKey;
-	private static byte[] key;
-
-	public Workload() {
-		try {
-			setKey(String.valueOf(System.currentTimeMillis()));
-			cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			throw new IllegalStateException();
-		} catch (NoSuchPaddingException e) {
-			e.printStackTrace();
-			throw new IllegalStateException();
-		} catch (InvalidKeyException e) {
-			e.printStackTrace();
-			throw new IllegalStateException();
-		}
-	}
-
-	public static void setKey(String myKey) {
-		MessageDigest sha = null;
-		try {
-			key = myKey.getBytes("UTF-8");
-			sha = MessageDigest.getInstance("SHA-1");
-			key = sha.digest(key);
-			key = Arrays.copyOf(key, 16);
-			secretKey = new SecretKeySpec(key, "AES");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}
 
 	protected String callTo(String ipAndPort) throws UnsupportedEncodingException, IOException {
 		long tic = System.nanoTime();
@@ -139,29 +94,13 @@ public abstract class Workload {
 		try {
 			semaphore.acquire();
 			long start = System.nanoTime();
-			byte[] encryptme;
 			int i = 0;
-			long passedTime = 0;
-			try {
-				encryptme = String.valueOf(System.currentTimeMillis()).getBytes("UTF-8");
-			} catch (UnsupportedEncodingException e1) {
-				e1.printStackTrace();
-				throw new IllegalStateException();
-			}
+			
 			while (true) {
-				try {
-					encryptme = cipher.doFinal(encryptme);
-				} catch (IllegalBlockSizeException e) {
-					e.printStackTrace();
-					throw new IllegalStateException();
-				} catch (BadPaddingException e) {
-					e.printStackTrace();
-					throw new IllegalStateException();
-				}
-				i++;
 				if (System.nanoTime() - start > milliseconds * 1000000)
 					break;
 			}
+			
 			long end = System.nanoTime();
 			switch (this.getClass().getName().charAt(this.getClass().getName().length() - 1)){
 			case 'A':
