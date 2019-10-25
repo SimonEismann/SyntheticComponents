@@ -27,7 +27,13 @@ public class LogResetServlet extends HttpServlet {
 		LoggingExtCallE.globalQueue.clear();
 		LoggingExtCallF.globalQueue.clear();
 		LoggingExtCallG.globalQueue.clear();
-		LoggingInternal.globalQueue.clear();
+		LoggingInternalA.globalQueue.clear();
+		LoggingInternalB.globalQueue.clear();
+		LoggingInternalC.globalQueue.clear();
+		LoggingInternalD.globalQueue.clear();
+		LoggingInternalE.globalQueue.clear();
+		LoggingInternalF.globalQueue.clear();
+		LoggingInternalG.globalQueue.clear();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

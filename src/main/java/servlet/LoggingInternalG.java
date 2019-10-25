@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/int1")
-public class LoggingInternal extends HttpServlet {
+@WebServlet("/intG")
+public class LoggingInternalG extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static Queue<String> globalQueue = new ConcurrentLinkedQueue<String>();
 	
-    public LoggingInternal() {
+    public LoggingInternalG() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
