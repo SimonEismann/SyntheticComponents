@@ -24,7 +24,7 @@ import servlet.LoggingInternalF;
 import servlet.LoggingInternalG;
 
 public abstract class Workload {
-	private static Semaphore semaphore = new Semaphore(2, false);	//TODO: fuer mehr kerne als variable durchreichen -> coloc_all
+	public static Semaphore semaphore = new Semaphore(2, false);
 	
 	private Random rand = new Random();
 

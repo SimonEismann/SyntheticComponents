@@ -1,5 +1,7 @@
 package startup;
 
+import java.util.concurrent.Semaphore;
+
 import javax.servlet.ServletContextEvent;
 
 import servlet.IndexServletA;
@@ -16,6 +18,7 @@ import workload.ComponentE;
 import workload.ComponentF;
 import workload.ComponentG;
 import workload.Proxy;
+import workload.Workload;
 import workload.ComponentA;
 
 public class Startup implements javax.servlet.ServletContextListener {
@@ -49,6 +52,15 @@ public class Startup implements javax.servlet.ServletContextListener {
 		} else if (component.equals("DG")) {
 			IndexServletD.workload = new ComponentD();
 			IndexServletG.workload = new ComponentG();
+		} else if (component.equals("all")) {
+			Workload.semaphore = new Semaphore(4, false);	//4 core support for coloc_all
+			IndexServletF.workload = new ComponentF();
+			IndexServletG.workload = new ComponentG();
+			IndexServletE.workload = new ComponentE("localhost:8080/SyntheticComponents/indexF", "localhost:8080/SyntheticComponents/indexG");
+			IndexServletD.workload = new ComponentD();
+			IndexServletC.workload = new ComponentC("localhost:8080/SyntheticComponents/indexD");
+			IndexServletB.workload = new ComponentB("localhost:8080/SyntheticComponents/indexC", "localhost:8080/SyntheticComponents/indexE");
+			IndexServletA.workload = new ComponentA("localhost:8080/SyntheticComponents/indexB");
 		}
 	}
 }
