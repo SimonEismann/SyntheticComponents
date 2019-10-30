@@ -53,7 +53,7 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletD.workload = new ComponentD();
 			IndexServletG.workload = new ComponentG();
 		} else if (component.equals("all")) {
-			Workload.semaphore = new Semaphore(4, false);	//4 core support for coloc_all
+			Workload.semaphore = new Semaphore(8, false);	//4 core support for coloc_all
 			IndexServletF.workload = new ComponentF();
 			IndexServletG.workload = new ComponentG();
 			IndexServletE.workload = new ComponentE("localhost:8080/SyntheticComponents/indexF", "localhost:8080/SyntheticComponents/indexG");
