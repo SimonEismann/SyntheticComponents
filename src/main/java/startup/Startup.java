@@ -27,7 +27,7 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletG.workload = new ComponentG();
 		} else if (component.equals("Proxy")) {
 			IndexServletA.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA");	//proxy also on indexA
-			IndexServletA2.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA2");
+			/*IndexServletA2.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA2");*/
 		} else if (component.equals("FG")) {
 			IndexServletF.workload = new ComponentF();
 			IndexServletG.workload = new ComponentG();
