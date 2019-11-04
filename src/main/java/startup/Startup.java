@@ -27,7 +27,7 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletG.workload = new ComponentG();
 		} else if (component.equals("Proxy")) {
 			IndexServletA.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA");	//proxy also on indexA
-			/*IndexServletA2.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA2");*/
+			IndexServletA2.workload = new Proxy(System.getenv("IP_A") + "/SyntheticComponents/indexA2");
 		} else if (component.equals("FG")) {
 			IndexServletF.workload = new ComponentF();
 			IndexServletG.workload = new ComponentG();
@@ -51,7 +51,7 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletC.workload = new ComponentC("localhost:8080/SyntheticComponents/indexD");
 			IndexServletB.workload = new ComponentB("localhost:8080/SyntheticComponents/indexC", "localhost:8080/SyntheticComponents/indexE");
 			IndexServletA.workload = new ComponentA("localhost:8080/SyntheticComponents/indexB");
-		} /*else if (component.equals("mwcA")) {
+		} else if (component.equals("mwcA")) {
 			IndexServletA.workload = new ComponentA(System.getenv("IP_B") + "/SyntheticComponents/indexB");
 			IndexServletA2.workload = new ComponentA(System.getenv("IP_B") + "/SyntheticComponents/indexB2");
 		} else if (component.equals("mwcB")) {
@@ -70,6 +70,6 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletF.workload = new ComponentF();
 			IndexServletG.workload = new ComponentG();
 			IndexServletF2.workload = new ComponentF2();
-		}*/
+		}
 	}
 }

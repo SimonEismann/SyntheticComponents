@@ -45,25 +45,52 @@ public abstract class Workload {
 		long toc = System.nanoTime();
 		switch (ipAndPort.charAt(ipAndPort.length() - 1)){
 			case 'A':
-				LoggingExtCallA.globalQueue.add(tic + "," + toc);
+				LoggingExtCallA.globalQueue.add(tic + "," + toc + ",1");
 				break;
 			case 'B':
-				LoggingExtCallB.globalQueue.add(tic + "," + toc);
+				LoggingExtCallB.globalQueue.add(tic + "," + toc+ ",1");
 				break;
 			case 'C':
-				LoggingExtCallC.globalQueue.add(tic + "," + toc);
+				LoggingExtCallC.globalQueue.add(tic + "," + toc+ ",1");
 				break;
 			case 'D':
-				LoggingExtCallD.globalQueue.add(tic + "," + toc);
+				LoggingExtCallD.globalQueue.add(tic + "," + toc+ ",1");
 				break;
 			case 'E':
-				LoggingExtCallE.globalQueue.add(tic + "," + toc);
+				LoggingExtCallE.globalQueue.add(tic + "," + toc+ ",1");
 				break;
 			case 'F':
-				LoggingExtCallF.globalQueue.add(tic + "," + toc);
+				LoggingExtCallF.globalQueue.add(tic + "," + toc+ ",1");
 				break;
 			case 'G':
-				LoggingExtCallG.globalQueue.add(tic + "," + toc);
+				LoggingExtCallG.globalQueue.add(tic + "," + toc+ ",1");
+				break;
+			case '2':
+				switch (ipAndPort.charAt(ipAndPort.length() - 2)){
+					case 'A':
+						LoggingExtCallA.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					case 'B':
+						LoggingExtCallB.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					case 'C':
+						LoggingExtCallC.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					case 'D':
+						LoggingExtCallD.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					case 'E':
+						LoggingExtCallE.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					case 'F':
+						LoggingExtCallF.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					case 'G':
+						LoggingExtCallG.globalQueue.add(tic + "," + toc+ ",2");
+						break;
+					default:
+						throw new IllegalStateException("Component type doesn't match");
+				}
 				break;
 			default:
 				throw new IllegalStateException("Component type doesn't match");
