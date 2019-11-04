@@ -53,19 +53,19 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletA.workload = new ComponentA("localhost:8080/SyntheticComponents/indexB");
 		} else if (component.equals("mwcA")) {
 			IndexServletA.workload = new ComponentA(System.getenv("IP_B") + "/SyntheticComponents/indexB");
-			IndexServletA2.workload = new ComponentA(System.getenv("IP_B") + "/SyntheticComponents/indexB2");
+			IndexServletA2.workload = new ComponentA2(System.getenv("IP_B") + "/SyntheticComponents/indexB2");
 		} else if (component.equals("mwcB")) {
 			IndexServletB.workload = new ComponentB(System.getenv("IP_C") + "/SyntheticComponents/indexC", System.getenv("IP_E") + "/SyntheticComponents/indexE");
-			IndexServletB2.workload = new ComponentB(System.getenv("IP_C") + "/SyntheticComponents/indexC2", System.getenv("IP_E") + "/SyntheticComponents/indexE2");
+			IndexServletB2.workload = new ComponentB2(System.getenv("IP_C") + "/SyntheticComponents/indexC2", System.getenv("IP_E") + "/SyntheticComponents/indexE2");
 		} else if (component.equals("mwcC")) {
 			IndexServletC.workload = new ComponentC(System.getenv("IP_D") + "/SyntheticComponents/indexD");
-			IndexServletC2.workload = new ComponentC(System.getenv("IP_D") + "/SyntheticComponents/indexD2");
+			IndexServletC2.workload = new ComponentC2(System.getenv("IP_D") + "/SyntheticComponents/indexD2");
 		} else if (component.equals("mwcD")) {
 			IndexServletD.workload = new ComponentD();
 			IndexServletD2.workload = new ComponentD2();
 		} else if (component.equals("mwcE")) {
 			IndexServletE.workload = new ComponentE(System.getenv("IP_F") + "/SyntheticComponents/indexF", System.getenv("IP_G") + "/SyntheticComponents/indexG");
-			IndexServletE2.workload = new ComponentE(System.getenv("IP_F") + "/SyntheticComponents/indexF2", System.getenv("IP_G") + "/SyntheticComponents/indexG");
+			IndexServletE2.workload = new ComponentE2(System.getenv("IP_F") + "/SyntheticComponents/indexF2", System.getenv("IP_G") + "/SyntheticComponents/indexG");
 		} else if (component.equals("mwcFG")) {
 			IndexServletF.workload = new ComponentF();
 			IndexServletG.workload = new ComponentG();
