@@ -85,9 +85,6 @@ public abstract class Workload {
 					case 'F':
 						LoggingExtCallF.globalQueue.add(tic + "," + toc+ ",2");
 						break;
-					case 'G':
-						LoggingExtCallG.globalQueue.add(tic + "," + toc+ ",2");
-						break;
 					default:
 						throw new IllegalStateException("Component type doesn't match");
 				}
