@@ -168,6 +168,42 @@ public abstract class Workload {
 			case 'y':
 				//Proxy class
 				break;
+			case '2':
+				switch (this.getClass().getName().charAt(this.getClass().getName().length() - 2)){
+				case 'A':
+					LoggingInternalA.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+					break;
+				case 'B':
+					LoggingInternalB.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+					break;
+				case 'C':
+					LoggingInternalC.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+					break;
+				case 'D':
+					LoggingInternalD.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+					break;
+				case 'E':
+					LoggingInternalE.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+					break;
+				case 'F':
+					LoggingInternalF.globalQueue
+					.add(i + "," + Math.floor(milliseconds * 1000000) + "," + (end - start) + ","
+							+ (Math.floor(milliseconds * 1000000) - end + start) + "," + start + "," + end);
+					break;
+				default:
+					throw new IllegalStateException("Workload class: No internal logger for class");
+				}
+				break;
 			default:
 				throw new IllegalStateException("Workload class: No internal logger for class");
 			}
