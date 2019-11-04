@@ -17,7 +17,7 @@ public class ComponentA2 extends Workload {
 	public String performWork() throws UnsupportedEncodingException, IOException {
 		double result = performConstantWork(30);
 		String result2 = callTo(ipB);
-		if(rnd.nextInt(10) == 9) {
+		if(rnd.nextBoolean()) {
 			result2 += callTo(ipB);
 		}
 		return "Served at Component A2! --> " + result + "\n\t"+ result2.replace("\t", "\t\t");
