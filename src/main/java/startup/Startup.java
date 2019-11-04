@@ -59,7 +59,7 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletB2.workload = new ComponentB2(System.getenv("IP_C") + "/SyntheticComponents/indexC2", System.getenv("IP_E") + "/SyntheticComponents/indexE2");
 		} else if (component.equals("mwcC")) {
 			IndexServletC.workload = new ComponentC(System.getenv("IP_D") + "/SyntheticComponents/indexD");
-			IndexServletC2.workload = new ComponentC2(System.getenv("IP_D") + "/SyntheticComponents/indexD2");
+			IndexServletC2.workload = new ComponentC2(System.getenv("IP_D") + "/SyntheticComponents/indexD");
 		} else if (component.equals("mwcD")) {
 			IndexServletD.workload = new ComponentD();
 			IndexServletD2.workload = new ComponentD2();
