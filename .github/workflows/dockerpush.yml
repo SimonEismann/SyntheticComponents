@@ -13,8 +13,8 @@ jobs:
       - uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-8
         with:
           args: build 
-      - uses: HurricanKai/Publish-Docker-Github-Action@master
+      - uses: jerray/publish-docker-action@master
         with:
-          name: simoneismann/syntheticcomponents
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: simoneismann/syntheticcomponents
