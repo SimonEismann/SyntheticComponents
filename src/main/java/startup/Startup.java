@@ -75,6 +75,12 @@ public class Startup implements javax.servlet.ServletContextListener {
 			IndexServletF.workload = new ComponentF();
 			IndexServletG.workload = new ComponentG();
 			IndexServletF2.workload = new ComponentF2();
+		} else if (component.equals("hiwiA")) {
+			IndexServletA.workload = new ComponentHiwiA(System.getenv("IP_B") + "/SyntheticComponents/indexB", System.getenv("IP_C") + "/SyntheticComponents/indexC");
+		} else if (component.equals("hiwiB")) {
+			IndexServletB.workload = new ComponentHiwiB();
+		} else if (component.equals("hiwiC")) {
+			IndexServletC.workload = new ComponentHiwiC();
 		}
 	}
 }
