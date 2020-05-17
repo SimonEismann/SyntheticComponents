@@ -1,3 +1,3 @@
 # SyntheticComponents
 
-This is a project
+Component-based software system with synthetic resource demands. 
