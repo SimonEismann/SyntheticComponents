@@ -14,7 +14,7 @@ jobs:
         with:
           args: build 
       - name: Install packages
-        run: mv build/libs/workspace.war build/libs/SyntheticComponents.war 
+        run: sudo mv build/libs/workspace.war build/libs/SyntheticComponents.war 
       - uses: jerray/publish-docker-action@master
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
