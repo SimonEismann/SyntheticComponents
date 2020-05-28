@@ -15,7 +15,7 @@ public class ComponentHiwiA extends Workload {
 	
 	@Override
 	public String performWork() throws UnsupportedEncodingException, IOException {
-		double result = performConstantWork(200);
+		double result = performConstantWork(10);
 		String result2 = callTo(ipB);
 		String result3 = callTo(ipC);
 		return "Served at Component A! --> " + result + "\n\t"+ result2.replace("\t", "\t\t") + "\n\t"+ result3.replace("\t", "\t\t");
