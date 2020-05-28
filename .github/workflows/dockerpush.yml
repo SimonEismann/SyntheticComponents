@@ -13,6 +13,8 @@ jobs:
       - uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-8
         with:
           args: build 
+      - name: Install packages
+        run: sudo mv build/libs/workspace.war build/libs/SyntheticComponents.war 
       - uses: jerray/publish-docker-action@master
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
